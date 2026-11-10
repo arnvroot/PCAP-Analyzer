@@ -1,7 +1,10 @@
-# PCAP Threat Radar — Offline SOC & DFIR Triage Dashboard
+# PCAP Analyzer-Offline
 
-An offline, memory-bounded PCAP/PCAPNG triage engine and dark-themed SOC desktop dashboard built for cybersecurity analysts and DFIR triage. It streams network captures one packet at a time with `dpkt` — the file is never loaded entirely into memory — allowing it to comfortably process multi-gigabyte captures (500MB+ / 500,000+ packets in <45s) under a strict 100MB RAM footprint.
-
+A lightweight desktop app in Python to analyze PCAP files, detect network threats in real time, and export summary reports as PDFs.
+- Reads .pcap files without loading the whole file into RAM.
+- Catches cleartext passwords, port scans, and unusual DNS queries in real time.
+- Shows live traffic charts and exports an easy-to-read PDF report.
+- Can analyze 500MB of pcap file in under 45 seconds
 ---
 
 ## 🌟 Key Features
