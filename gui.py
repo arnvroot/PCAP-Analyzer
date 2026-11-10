@@ -818,11 +818,13 @@ class PcapAnalyzerApp(ctk.CTk):
         self.ax_pie.set_facecolor(CARD_BG)
         self.ax_bar.set_facecolor(CARD_BG)
 
-        # Placeholder donut
-        self.ax_pie.pie([1], labels=["No Traffic"], colors=["#2A3042"],
-                        textprops=dict(color="#94A3B8", fontsize=10),
-                        wedgeprops=dict(width=0.4, edgecolor=CARD_BG, linewidth=2))
-        self.ax_pie.set_title("Protocol Breakdown", color="#E2E8F0", fontsize=11, fontweight="bold", pad=8)
+        # Placeholder vertical bars
+        self.ax_pie.bar(["IPv4", "TCP", "UDP", "ARP"], [0, 0, 0, 0], color="#2A3042", width=0.5)
+        self.ax_pie.set_title("Protocol Breakdown (Packets)", color="#E2E8F0", fontsize=11, fontweight="bold", pad=8)
+        self.ax_pie.tick_params(colors="#94A3B8", labelsize=8)
+        for spine in self.ax_pie.spines.values():
+            spine.set_visible(False)
+        self.ax_pie.grid(axis="y", color="#242B3B", linestyle="--", alpha=0.6)
 
         # Placeholder bar
         self.ax_bar.barh(["No Data"], [0], color="#2A3042")
@@ -839,35 +841,46 @@ class PcapAnalyzerApp(ctk.CTk):
             self.ax_pie.set_facecolor(CARD_BG)
             self.ax_bar.set_facecolor(CARD_BG)
 
-            # 1. Protocol Donut Chart
+            # 1. Protocol Vertical Column Bar Chart
             protos = data.get("protocol_counts", {})
             plot_protos = {k: v for k, v in protos.items() if v > 0}
 
             if plot_protos:
                 labels = list(plot_protos.keys())
-                sizes = list(plot_protos.values())
-                palette = [ACCENT_CYAN, ACCENT_PURPLE, ACCENT_RED, ACCENT_AMBER, "#38BDF8", "#4ADE80", "#C084FC"]
-                colors = [palette[i % len(palette)] for i in range(len(labels))]
+                counts = list(plot_protos.values())
+                palette = [ACCENT_CYAN, ACCENT_PURPLE, ACCENT_AMBER, "#38BDF8", ACCENT_GREEN, ACCENT_RED, "#C084FC"]
+                bar_colors = [palette[i % len(palette)] for i in range(len(labels))]
 
-                wedges, texts, autotexts = self.ax_pie.pie(
-                    sizes,
-                    labels=labels,
-                    autopct="%1.0f%%",
-                    pctdistance=0.75,
-                    colors=colors,
-                    textprops=dict(color="#F1F5F9", fontsize=9),
-                    wedgeprops=dict(width=0.4, edgecolor=CARD_BG, linewidth=2),
-                )
-                for at in autotexts:
-                    at.set_color("#FFFFFF")
-                    at.set_fontsize(8)
-                    at.set_fontweight("bold")
+                bars = self.ax_pie.bar(labels, counts, color=bar_colors, width=0.5, edgecolor="none")
+                self.ax_pie.set_title("Protocol Breakdown (Packets)", color="#E2E8F0", fontsize=11, fontweight="bold", pad=8)
+                self.ax_pie.tick_params(colors="#94A3B8", labelsize=8)
+                for spine in self.ax_pie.spines.values():
+                    spine.set_visible(False)
+                self.ax_pie.grid(axis="y", color="#242B3B", linestyle="--", alpha=0.6)
+
+                # Numbers above bars
+                max_val = max(counts) if counts else 1
+                self.ax_pie.set_ylim(0, max_val * 1.15)
+                for bar in bars:
+                    yval = bar.get_height()
+                    if yval > 0:
+                        lbl_str = f"{yval:,}" if yval < 10000 else f"{yval/1000:.0f}k"
+                        self.ax_pie.text(
+                            bar.get_x() + bar.get_width() / 2,
+                            yval,
+                            lbl_str,
+                            ha="center",
+                            va="bottom",
+                            color="#FFFFFF",
+                            fontsize=8,
+                            fontweight="bold",
+                        )
             else:
-                self.ax_pie.pie([1], labels=["No Traffic"], colors=["#2A3042"],
-                                textprops=dict(color="#94A3B8", fontsize=10),
-                                wedgeprops=dict(width=0.4, edgecolor=CARD_BG, linewidth=2))
-
-            self.ax_pie.set_title("Protocol Breakdown", color="#E2E8F0", fontsize=11, fontweight="bold", pad=8)
+                self.ax_pie.bar(["None"], [0], color="#2A3042")
+                self.ax_pie.set_title("Protocol Breakdown", color="#E2E8F0", fontsize=11, fontweight="bold", pad=8)
+                self.ax_pie.tick_params(colors="#94A3B8", labelsize=8)
+                for spine in self.ax_pie.spines.values():
+                    spine.set_visible(False)
 
             # 2. Top Destination Ports Horizontal Bar
             ports = data.get("dst_port_counts", {})
