@@ -495,7 +495,7 @@ class PcapAnalyzerApp(ctk.CTk):
         # Branding
         title_label = ctk.CTkLabel(
             self.sidebar_frame,
-            text="🛡️ PCAP Threat Radar",
+            text="🛜PCAP Analyzer",
             font=ctk.CTkFont(size=20, weight="bold"),
             text_color="#FFFFFF",
         )
@@ -503,7 +503,7 @@ class PcapAnalyzerApp(ctk.CTk):
 
         subtitle_label = ctk.CTkLabel(
             self.sidebar_frame,
-            text="SOC & DFIR Traffic Intelligence",
+            text=" SOC & DFIR Traffic Intelligence",
             font=ctk.CTkFont(size=12),
             text_color=ACCENT_CYAN,
         )
