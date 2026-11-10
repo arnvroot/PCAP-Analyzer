@@ -47,6 +47,8 @@ python gui.py
 3. Watch packets, charts, and red flags stream in real time.
 4. Click **"📑 Export PDF Threat Report"** to export an executive PDF report.
 
+Note: You can just run " python gui.py " endlessly after installing the requirements once or if the requirements are already installed on your device. 
+
 ### 2. Command-Line Interface (CLI)
 ```powershell
 python analyzer.py --pcap C:\captures\incident.pcap --outdir .\output
