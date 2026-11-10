@@ -1,4 +1,6 @@
 # PCAP Analyzer : Offline
+<img width="1917" height="1041" alt="image" src="https://github.com/user-attachments/assets/d450e806-2f76-4017-a216-9d5c61f2cf5e" />
+<img width="1547" height="830" alt="image" src="https://github.com/user-attachments/assets/09a19570-6ddc-498a-a870-48d51079f9c8" />
 
 A lightweight desktop app in Python to analyze PCAP files, detect network threats in real time, and export summary reports as PDFs.
 - Reads .pcap files without loading the whole file into RAM.
