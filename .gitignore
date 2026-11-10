@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+*$py.class
+output/
+*.pcap
+*.pcapng
+*.cap
+*.pdf
+.DS_Store
+.vscode/
+.idea/

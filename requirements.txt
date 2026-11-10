@@ -1,0 +1,7 @@
+dpkt
+customtkinter
+matplotlib
+reportlab
+streamlit
+pandas
+plotly
