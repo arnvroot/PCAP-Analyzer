@@ -12,7 +12,7 @@ A lightweight desktop app in Python to analyze PCAP files, detect network threat
 ## 🌟 Key Features
 
 - **🚀 Multithreaded Desktop GUI (`gui.py`)**: Built with CustomTkinter. Packet parsing runs in a non-blocking background worker thread with thread-safe Queue event streaming.
-- **📊 Embedded Data Visualizers**: Dark-styled Matplotlib donut charts for Protocol Distribution (TCP, UDP, IPv4, IPv6, ARP, ICMP) and horizontal bar charts for Top Destination Ports.
+- **📊 Embedded Data Visualizers**: Dark-styled Matplotlib bar charts for Protocol Distribution (TCP, UDP, IPv4, IPv6, ARP, ICMP) and horizontal bar charts for Top Destination Ports.
 - **🚨 Real-Time Security Alerts**: Live threat detection feed with severity badges (`[HIGH]`, `[MED]`, `[LOW]`), live text search filter, and severity filters.
 - **🛡️ Multi-Vector Threat Engines**:
   - **Plaintext Credential Leaks**: Detects passwords, API keys, tokens, Basic/Bearer auth in HTTP/FTP/SMTP.
